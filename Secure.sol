@@ -10,9 +10,7 @@ import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
     2- A second key to be shared with your collaborators, of course this key is limited compared to the first one.
     With this standard the ownership of the contract is managed in a more agile and secure way. It is also less expansive to share ownership
     of the contract, with this standard you don't have to add a member to a data structure, you just have to share the already created key.
-
     We offer 2 modifiers to operate:
-
     noParaxites ==> This is used for limiting a certain function to the owner and collaborators.
     ownerAction ==> This is used for limiting a certain function only to the owner, it won't be accessible even to the collaborators.
 */
@@ -27,7 +25,7 @@ abstract contract Secure{
      */
     constructor(
         bytes32 root,
-        string ownerKey
+        string memory ownerKey
     ) {
         setRoot(root);
         setOwnerKey(ownerKey);
@@ -56,7 +54,8 @@ abstract contract Secure{
     * @dev This modifier checks if the key passed to use a certain function is valid
     */
     modifier noParaxites(string memory _key, bytes32[] memory _proof){
-        bool verification = MerkleProof.verify(_proof, _getRoot(), _key);
+
+        bool verification = MerkleProof.verify(_proof, _getRoot(), keccak256(abi.encodePacked(_key)));
         require(verification, "Paraxite identified: if you are the owner check your proof!");
         _;
     }
@@ -66,7 +65,7 @@ abstract contract Secure{
     */
 
     modifier ownerAction(bytes32[] memory _proof){
-        bool verification = MerkleProof.verify(_proof, _getRoot(), mnemonicForOwner);
+        bool verification = MerkleProof.verify(_proof, _getRoot(), keccak256(abi.encodePacked(mnemonicForOwner)));
         require(verification, "Secure protocol: This action is reserved for the owner, if you are the owner check your proof!");
         _;
     }
