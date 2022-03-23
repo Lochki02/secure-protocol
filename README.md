@@ -8,8 +8,11 @@
 
 This Secure protocol is a fork of [@Openzeppelin/Ownable.sol](https://github.com/OpenZeppelin). We added the interaction with the merkle tree method to enhance the security of the ownership.<br>
 By creating hashed mnemonic phrases off-chain we create a key based system to define roles of owner and collaborators, by default the merkletree should contain 2 keys:<br>
+<br>
   **1-** The private key only usable by the owner.<br>
-  **2-** A second key to be shared with your collaborators, of course this key is limited compared to the first one.<br>
+  **2-** A second key to be shared with your collaborators, of course this key is limited compared to the first one.
+  <br>
+<br>
 With this standard the ownership of the contract is managed in a more agile and secure way. It is also less expansive to share ownership
 of the contract, with this standard you don't have to add a member to a data structure, you just have to share the already created key.
 We offer 2 modifiers to operate:<br>
