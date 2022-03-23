@@ -27,8 +27,8 @@ abstract contract Secure{
         bytes32 root,
         string memory ownerKey
     ) {
-        setRoot(root);
-        setOwnerKey(ownerKey);
+        merkleRoot = root;
+        mnemonicForOwner = ownerKey;
     }
 
     /**
@@ -68,15 +68,5 @@ abstract contract Secure{
         bool verification = MerkleProof.verify(_proof, _getRoot(), keccak256(abi.encodePacked(mnemonicForOwner)));
         require(verification, "Secure protocol: This action is reserved for the owner, if you are the owner check your proof!");
         _;
-    }
-
-    // THESE ARE PRIVATE FUNCTIONS FOR THE CONTRACT CONSTRUCTOR
-
-    function setRoot(bytes32 _newRoot) private{
-        merkleRoot = _newRoot;
-    }
-
-    function setOwnerKey(string memory _newMnemonic) private{
-        mnemonicForOwner = _newMnemonic;
     }
 }
