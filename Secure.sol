@@ -19,7 +19,7 @@ import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 
 abstract contract Secure{
     bytes32 private merkleRoot;
-    bytes32 private mnemonicForOwner;
+    string private mnemonicForOwner;
 
     /**
      * @dev Initializes the contract setting the root of the merkle as root
@@ -27,7 +27,7 @@ abstract contract Secure{
      */
     constructor(
         bytes32 root,
-        bytes32 ownerKey
+        string ownerKey
     ) {
         setRoot(root);
         setOwnerKey(ownerKey);
@@ -55,7 +55,7 @@ abstract contract Secure{
     /*
     * @dev This modifier checks if the key passed to use a certain function is valid
     */
-    modifier noParaxites(bytes32 _key, bytes32[] memory _proof){
+    modifier noParaxites(string memory _key, bytes32[] memory _proof){
         bool verification = MerkleProof.verify(_proof, _getRoot(), _key);
         require(verification, "Paraxite identified: if you are the owner check your proof!");
         _;
@@ -77,7 +77,7 @@ abstract contract Secure{
         merkleRoot = _newRoot;
     }
 
-    function setOwnerKey(bytes32 _newMnemonic) private{
+    function setOwnerKey(string memory _newMnemonic) private{
         mnemonicForOwner = _newMnemonic;
     }
 }
