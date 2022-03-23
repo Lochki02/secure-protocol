@@ -15,7 +15,9 @@ By creating hashed mnemonic phrases off-chain we create a key based system to de
 <br>
 With this standard the ownership of the contract is managed in a more agile and secure way. It is also less expansive to share ownership
 of the contract, with this standard you don't have to add a member to a data structure, you just have to share the already created key.
-We offer 2 modifiers to operate:<br>
+We offer 2 modifiers to operate:
+<br>
+<br>
 noParaxites ==> This is used for limiting a certain function to the owner and collaborators.<br>
 ownerAction ==> This is used for limiting a certain function only to the owner, it won't be accessible even to the collaborators.<br>
 
