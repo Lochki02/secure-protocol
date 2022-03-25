@@ -26,7 +26,7 @@ ownerAction ==> This is used for limiting a certain function only to the owner, 
 Let's say that you have a presale handler and you want to limit those relative actions to the owner and collaborators of the contract.
 
 ```sh
-function turnOnPresale (bytes32 key, bytes32[] memory keyProof) public view noParaxites(key, keyProof){
+function turnOnPresale (string memory key, bytes32[] memory keyProof) public view noParaxites(key, keyProof){
   //TODO
 }
 ```
